@@ -3,6 +3,7 @@ import 'package:demo_flutter_bloc/blocs/splash/splash_bloc.dart';
 import 'package:demo_flutter_bloc/constants.dart';
 import 'package:demo_flutter_bloc/pages/base/base_state.dart';
 import 'package:demo_flutter_bloc/resources/colors.dart';
+import 'package:demo_flutter_bloc/widgets/info_widget.dart';
 import 'package:demo_flutter_bloc/widgets/text_button_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -18,35 +19,35 @@ class SplashPage extends StatefulWidget {
 class _SplashPageState extends BaseState<SplashPage, SplashBloc> {
   @override
   Widget buildContent(BuildContext context) {
-    return Scaffold(
-      body: BlocBuilder<SplashBloc, NoDataState>(
-        builder: (context, data) {
-          return _buildView();
-        },
-      ),
+    return BlocBuilder<SplashBloc, NoDataState>(
+      builder: (context, data) {
+        return _buildView();
+      },
     );
   }
 
   Widget _buildView() {
-    return Stack(
-      children: [
-        _background(),
-        Padding(
-          padding: const EdgeInsets.all(14),
-          child: Column(
-            children: [
-              Expanded(
-                child: _logo(),
-              ),
-              Padding(
-                padding: const EdgeInsets.only(bottom: 16),
-                child: _info(),
-              ),
-              _actions(),
-            ],
-          ),
-        )
-      ],
+    return Scaffold(
+      body: Stack(
+        children: [
+          _background(),
+          Padding(
+            padding: const EdgeInsets.all(14),
+            child: Column(
+              children: [
+                Expanded(
+                  child: _logo(),
+                ),
+                Padding(
+                  padding: const EdgeInsets.only(bottom: 16),
+                  child: _info(),
+                ),
+                _actions(),
+              ],
+            ),
+          )
+        ],
+      ),
     );
   }
 
@@ -65,7 +66,7 @@ class _SplashPageState extends BaseState<SplashPage, SplashBloc> {
       mainAxisAlignment: MainAxisAlignment.center,
       children: [
         Padding(
-          padding: const EdgeInsets.only(right:20),
+          padding: const EdgeInsets.only(right: 20),
           child: Stack(
             children: [
               _LinearGradientMask(
@@ -97,35 +98,12 @@ class _SplashPageState extends BaseState<SplashPage, SplashBloc> {
   }
 
   Widget _info() {
-    return Row(
-      children: [
-        Padding(
-          padding: const EdgeInsets.only(right: 8),
-          child: Image.asset(
-            "assets/images/avatar_default.png",
-            height: 30,
-          ),
-        ),
-        Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            Text(
-              "Pawel Czerwinski",
-              style: TextStyle(
-                fontWeight: FontWeight.w700,
-                fontSize: 13,
-              ),
-            ),
-            Text(
-              "@pawel_czerwinski",
-              style: TextStyle(
-                fontWeight: FontWeight.w400,
-                fontSize: 11,
-              ),
-            )
-          ],
-        )
-      ],
+    final avatarUrl =
+        "https://media-exp1.licdn.com/dms/image/C4E03AQFvWEwjLCJLCQ/profile-displayphoto-shrink_800_800/0/1628220510849?e=1637193600&v=beta&t=E39LUUC9BeffM-h2V_Tc-9szQ9sJrMeVQLYOxKA1NMs";
+    return InfoWidget(
+      imageUrl: avatarUrl,
+      name: "Phạm Tiến Dũng",
+      username: "@tiendung01023",
     );
   }
 
