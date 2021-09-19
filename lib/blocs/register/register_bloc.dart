@@ -1,14 +1,14 @@
 import 'package:demo_flutter_bloc/blocs/base/no_data_state.dart';
-import 'package:demo_flutter_bloc/pages/router.dart';
 import 'package:flutter/widgets.dart';
 
 import '../base/base_bloc.dart';
 
-class LoginBloc extends BaseBloc<NoDataState> {
+class RegisterBloc extends BaseBloc<NoDataState> {
   final usernameController = TextEditingController();
   final passwordController = TextEditingController();
+  final rePasswordController = TextEditingController();
 
-  LoginBloc() : super(NoDataState());
+  RegisterBloc() : super(NoDataState());
 
   @override
   void dispose() {
@@ -18,16 +18,12 @@ class LoginBloc extends BaseBloc<NoDataState> {
   }
 
   Future<void> onSubmit() async {
-    print('[LoginBloc - onSubmit] run');
-    _goToHomeScreen();
+    print('[RegisterBloc - onSubmit] run');
+    _goToPop();
   }
 
-  Future<void> _goToHomeScreen() async {
-    print('[LoginBloc - goToLoginScreen] run');
-    await Navigator.pushNamedAndRemoveUntil(
-      context,
-      Routes.home,
-      (_) => false,
-    );
+  void _goToPop() {
+    print('[RegisterBloc - _goToPop] run');
+    Navigator.pop(context);
   }
 }

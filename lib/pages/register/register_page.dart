@@ -1,5 +1,5 @@
 import 'package:demo_flutter_bloc/blocs/base/no_data_state.dart';
-import 'package:demo_flutter_bloc/blocs/login/login_bloc.dart';
+import 'package:demo_flutter_bloc/blocs/register/register_bloc.dart';
 import 'package:demo_flutter_bloc/constants.dart';
 import 'package:demo_flutter_bloc/pages/base/base_state.dart';
 import 'package:demo_flutter_bloc/widgets/text_button_widget.dart';
@@ -8,17 +8,17 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/svg.dart';
 
-class LoginPage extends StatefulWidget {
-  const LoginPage({Key? key}) : super(key: key);
+class RegisterPage extends StatefulWidget {
+  const RegisterPage({Key? key}) : super(key: key);
 
   @override
-  _LoginPageState createState() => _LoginPageState();
+  _RegisterPageState createState() => _RegisterPageState();
 }
 
-class _LoginPageState extends BaseState<LoginPage, LoginBloc> {
+class _RegisterPageState extends BaseState<RegisterPage, RegisterBloc> {
   @override
   Widget buildContent(BuildContext context) {
-    return BlocBuilder<LoginBloc, NoDataState>(
+    return BlocBuilder<RegisterBloc, NoDataState>(
       builder: (context, data) {
         return _buildView();
       },
@@ -79,7 +79,7 @@ class _LoginPageState extends BaseState<LoginPage, LoginBloc> {
 
   Widget _titleWidget() {
     return Text(
-      "Log in",
+      "Register",
       style: TextStyle(
         fontWeight: FontWeight.w400,
         fontSize: 36,
@@ -101,13 +101,19 @@ class _LoginPageState extends BaseState<LoginPage, LoginBloc> {
           obscureText: true,
           hintText: "Password",
         ),
+        const SizedBox(height: 16),
+        TextFieldWidget(
+          controller: bloc.rePasswordController,
+          obscureText: true,
+          hintText: "Re-enter password",
+        ),
       ],
     );
   }
 
   Widget _btnSubmitWidget() {
     return TextButtonWidget(
-      text: "LOG IN",
+      text: "SIGN UP",
       onPress: bloc.onSubmit,
     );
   }
