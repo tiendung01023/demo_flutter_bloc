@@ -4,6 +4,7 @@ import 'package:demo_flutter_bloc/constants.dart';
 import 'package:demo_flutter_bloc/pages/base/base_state.dart';
 import 'package:demo_flutter_bloc/resources/colors.dart';
 import 'package:demo_flutter_bloc/widgets/info_widget.dart';
+import 'package:demo_flutter_bloc/widgets/linear_gradient_mark_widget.dart';
 import 'package:demo_flutter_bloc/widgets/text_button_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -69,7 +70,7 @@ class _SplashPageState extends BaseState<SplashPage, SplashBloc> {
           padding: const EdgeInsets.only(right: 20),
           child: Stack(
             children: [
-              _LinearGradientMask(
+              LinearGradientMaskWidget(
                 colors: [
                   Color(0xFFFF00D6),
                   Color(0xFFFF4D00),
@@ -125,30 +126,6 @@ class _SplashPageState extends BaseState<SplashPage, SplashBloc> {
           ),
         ),
       ],
-    );
-  }
-}
-
-class _LinearGradientMask extends StatelessWidget {
-  _LinearGradientMask({
-    required this.child,
-    required this.colors,
-  });
-  final Widget child;
-  final List<Color> colors;
-
-  @override
-  Widget build(BuildContext context) {
-    return ShaderMask(
-      shaderCallback: (bounds) {
-        return RadialGradient(
-          center: Alignment.centerLeft,
-          radius: 1,
-          colors: colors,
-          tileMode: TileMode.mirror,
-        ).createShader(bounds);
-      },
-      child: child,
     );
   }
 }

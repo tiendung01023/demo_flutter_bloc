@@ -2,6 +2,7 @@ import 'package:demo_flutter_bloc/blocs/base/no_data_state.dart';
 import 'package:demo_flutter_bloc/blocs/register/register_bloc.dart';
 import 'package:demo_flutter_bloc/constants.dart';
 import 'package:demo_flutter_bloc/pages/base/base_state.dart';
+import 'package:demo_flutter_bloc/resources/colors.dart';
 import 'package:demo_flutter_bloc/widgets/text_button_widget.dart';
 import 'package:demo_flutter_bloc/widgets/text_field_widget.dart';
 import 'package:flutter/material.dart';
@@ -29,6 +30,7 @@ class _RegisterPageState extends BaseState<RegisterPage, RegisterBloc> {
     return GestureDetector(
       onTap: () => FocusScope.of(context).unfocus(),
       child: Scaffold(
+        backgroundColor: MyColors.primaryBackground,
         body: SafeArea(
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,

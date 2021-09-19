@@ -6,10 +6,12 @@ import 'package:demo_flutter_bloc/helpers/cached_network_image_helper.dart';
 import 'package:demo_flutter_bloc/pages/base/base_state.dart';
 import 'package:demo_flutter_bloc/resources/colors.dart';
 import 'package:demo_flutter_bloc/widgets/info_widget.dart';
+import 'package:demo_flutter_bloc/widgets/linear_gradient_mark_widget.dart';
 import 'package:demo_flutter_bloc/widgets/text_button_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
+import 'package:flutter_svg/svg.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({Key? key}) : super(key: key);
@@ -32,6 +34,7 @@ class _HomePageState extends BaseState<HomePage, HomeBloc> {
     return GestureDetector(
       onTap: () => FocusScope.of(context).unfocus(),
       child: Scaffold(
+        backgroundColor: MyColors.primaryBackground,
         body: SafeArea(
           child: Padding(
             padding: EdgeInsets.symmetric(horizontal: 16),
@@ -57,6 +60,7 @@ class _HomePageState extends BaseState<HomePage, HomeBloc> {
             ),
           ),
         ),
+        bottomNavigationBar: _bottomNav(),
       ),
     );
   }
@@ -160,6 +164,68 @@ class _HomePageState extends BaseState<HomePage, HomeBloc> {
       textColor: MyColors.primary,
       backgroundColor: MyColors.primaryBackground,
       onPress: bloc.onSeeMore,
+    );
+  }
+
+  Widget _bottomNav() {
+    return Container(
+      padding: EdgeInsets.symmetric(vertical: 9),
+      decoration: BoxDecoration(
+        color: MyColors.primaryBackground,
+        boxShadow: [
+          BoxShadow(
+            color: MyColors.primary.withOpacity(0.3),
+            offset: Offset(0, -0.5),
+          )
+        ],
+      ),
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.spaceAround,
+        children: [
+          SvgPicture.asset(
+            "assets/images/bottom_nav_home.svg",
+            height: 16,
+            color: MyColors.primary.withOpacity(0.8),
+          ),
+          SvgPicture.asset(
+            "assets/images/bottom_nav_search.svg",
+            height: 16,
+            color: MyColors.primary.withOpacity(0.8),
+          ),
+          Container(
+            height: 40,
+            width: 70,
+            decoration: BoxDecoration(
+              borderRadius: BorderRadius.circular(20),
+              gradient: LinearGradient(
+                begin: Alignment.topCenter,
+                end: Alignment.bottomCenter,
+                colors: [
+                  Color(0xFFFF00D6),
+                  Color(0xFFFF4D00),
+                ],
+              ),
+            ),
+            child: Center(
+              child: SvgPicture.asset(
+                "assets/images/bottom_nav_add.svg",
+                height: 16,
+                color: MyColors.primaryBackground,
+              ),
+            ),
+          ),
+          SvgPicture.asset(
+            "assets/images/bottom_nav_message.svg",
+            height: 16,
+            color: MyColors.primary.withOpacity(0.8),
+          ),
+          SvgPicture.asset(
+            "assets/images/bottom_nav_person.svg",
+            height: 16,
+            color: MyColors.primary.withOpacity(0.8),
+          ),
+        ],
+      ),
     );
   }
 }
