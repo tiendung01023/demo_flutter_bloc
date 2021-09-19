@@ -9,6 +9,7 @@ import 'package:demo_flutter_bloc/widgets/text_button_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:demo_flutter_bloc/extensions/responsive_extension.dart';
 
 class SplashPage extends StatefulWidget {
   const SplashPage({Key? key}) : super(key: key);
@@ -32,19 +33,21 @@ class _SplashPageState extends BaseState<SplashPage, SplashBloc> {
       body: Stack(
         children: <Widget>[
           _background(),
-          Padding(
-            padding: const EdgeInsets.all(14),
-            child: Column(
-              children: <Widget>[
-                Expanded(
-                  child: _logo(),
-                ),
-                Padding(
-                  padding: const EdgeInsets.only(bottom: 16),
-                  child: _info(state),
-                ),
-                _actions(),
-              ],
+          SafeArea(
+            child: Padding(
+              padding: const EdgeInsets.all(14),
+              child: Column(
+                children: <Widget>[
+                  Expanded(
+                    child: _logo(),
+                  ),
+                  Padding(
+                    padding: const EdgeInsets.only(bottom: 16),
+                    child: _info(state),
+                  ),
+                  _actions(),
+                ],
+              ),
             ),
           )
         ],
@@ -78,19 +81,21 @@ class _SplashPageState extends BaseState<SplashPage, SplashBloc> {
                 child: SvgPicture.asset(
                   "assets/images/logo_0.svg",
                   color: Colors.white,
+                  height: 38.responsive(),
                 ),
               ),
               SvgPicture.asset(
                 "assets/images/logo_1.svg",
+                height: 38.responsive(),
               ),
             ],
           ),
         ),
-        const Text(
+        Text(
           "photo",
           style: TextStyle(
             fontWeight: FontWeight.w400,
-            fontSize: 48,
+            fontSize: 48.responsive(),
             fontFamily: FontConstants.comfortaa,
           ),
         )

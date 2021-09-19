@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:demo_flutter_bloc/extensions/responsive_extension.dart';
 
 class TextButtonWidget extends StatelessWidget {
   final String text;
@@ -46,7 +47,7 @@ class TextButtonWidget extends StatelessWidget {
               textAlign: TextAlign.center,
               style: TextStyle(
                 fontWeight: FontWeight.w900,
-                fontSize: 13,
+                fontSize: 13.responsive(),
                 color: textColor ?? Theme.of(context).backgroundColor,
               ),
             ),

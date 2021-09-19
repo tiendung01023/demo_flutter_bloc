@@ -2,11 +2,12 @@ import 'package:demo_flutter_bloc/blocs/base/no_data_state.dart';
 import 'package:demo_flutter_bloc/blocs/login/login_bloc.dart';
 import 'package:demo_flutter_bloc/constants.dart';
 import 'package:demo_flutter_bloc/pages/base/base_state.dart';
+import 'package:demo_flutter_bloc/widgets/back_button_widget.dart';
 import 'package:demo_flutter_bloc/widgets/text_button_widget.dart';
 import 'package:demo_flutter_bloc/widgets/text_field_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:flutter_svg/svg.dart';
+import 'package:demo_flutter_bloc/extensions/responsive_extension.dart';
 
 class LoginPage extends StatefulWidget {
   const LoginPage({Key? key}) : super(key: key);
@@ -37,7 +38,7 @@ class _LoginPageState extends BaseState<LoginPage, LoginBloc> {
               _customAppbarWidget(),
               Expanded(
                 child: Padding(
-                  padding: const EdgeInsets.symmetric(horizontal: 16),
+                  padding: EdgeInsets.symmetric(horizontal: 16.responsive()),
                   child: SingleChildScrollView(
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
@@ -62,19 +63,11 @@ class _LoginPageState extends BaseState<LoginPage, LoginBloc> {
 
   Widget _customAppbarWidget() {
     return Padding(
-      padding: const EdgeInsets.symmetric(
-        vertical: 12,
+      padding: EdgeInsets.symmetric(
+        vertical: 12.responsive(),
       ),
-      child: InkWell(
-        onTap: () => Navigator.pop(context),
-        child: Padding(
-          padding: const EdgeInsets.all(16.0),
-          child: SvgPicture.asset(
-            "assets/images/back_button.svg",
-            height: 11,
-            color: Theme.of(context).primaryColor,
-          ),
-        ),
+      child: BackButtonWidget(
+        onTap: () => Navigator.maybePop(context),
       ),
     );
   }
@@ -85,7 +78,7 @@ class _LoginPageState extends BaseState<LoginPage, LoginBloc> {
       style: TextStyle(
         color: Theme.of(context).primaryColor,
         fontWeight: FontWeight.w400,
-        fontSize: 36,
+        fontSize: 36.responsive(),
         fontFamily: FontConstants.comfortaa,
       ),
     );

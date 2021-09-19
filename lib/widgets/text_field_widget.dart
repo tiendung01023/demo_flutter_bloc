@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:demo_flutter_bloc/extensions/responsive_extension.dart';
 
 class TextFieldWidget extends StatelessWidget {
   final String? hintText;
@@ -31,6 +32,7 @@ class TextFieldWidget extends StatelessWidget {
       ),
       style: TextStyle(
         color: Theme.of(context).primaryColor,
+        fontSize: 15.responsive(),
       ),
       cursorColor: Theme.of(context).primaryColor,
     );

@@ -1,6 +1,7 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:demo_flutter_bloc/helpers/cached_network_image_helper.dart';
 import 'package:flutter/material.dart';
+import 'package:demo_flutter_bloc/extensions/responsive_extension.dart';
 
 class InfoWidget extends StatelessWidget {
   final String? imageUrl;
@@ -19,16 +20,20 @@ class InfoWidget extends StatelessWidget {
     return Row(
       children: <Widget>[
         Padding(
-          padding: const EdgeInsets.only(right: 8),
+          padding: EdgeInsets.only(
+            right: 8.responsive(),
+          ),
           child: imageUrl == null
               ? Container()
               : ClipRRect(
-                  borderRadius: BorderRadius.circular(15),
+                  borderRadius: BorderRadius.circular(
+                    15.responsive(),
+                  ),
                   child: CachedNetworkImage(
                     imageUrl: imageUrl!,
                     fit: BoxFit.cover,
-                    width: 30,
-                    height: 30,
+                    width: 30.responsive(),
+                    height: 30.responsive(),
                     placeholder: (_, __) =>
                         CachedNetworkImageHelper.placeholder(),
                     errorWidget: (_, __, dynamic ___) =>
@@ -44,7 +49,7 @@ class InfoWidget extends StatelessWidget {
               style: TextStyle(
                 color: Theme.of(context).primaryColor,
                 fontWeight: FontWeight.w700,
-                fontSize: 13,
+                fontSize: 13.responsive(),
               ),
             ),
             Text(
@@ -52,7 +57,7 @@ class InfoWidget extends StatelessWidget {
               style: TextStyle(
                 color: Theme.of(context).primaryColor,
                 fontWeight: FontWeight.w400,
-                fontSize: 11,
+                fontSize: 11.responsive(),
               ),
             )
           ],

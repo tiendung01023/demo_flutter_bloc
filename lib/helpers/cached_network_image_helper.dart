@@ -1,3 +1,4 @@
+import 'package:demo_flutter_bloc/main.dart';
 import 'package:flutter/material.dart';
 
 class CachedNetworkImageHelper {
@@ -10,8 +11,11 @@ class CachedNetworkImageHelper {
   }
 
   static Widget error() {
-    return const Center(
-      child: Icon(Icons.panorama),
+    return Container(
+      color: Theme.of(navigationKey.currentContext!).primaryColor.withOpacity(0.3),
+      child: const Center(
+        child: Icon(Icons.panorama),
+      ),
     );
   }
 }

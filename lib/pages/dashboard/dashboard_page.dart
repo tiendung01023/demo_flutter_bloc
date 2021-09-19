@@ -11,6 +11,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:demo_flutter_bloc/extensions/responsive_extension.dart';
 
 class DashboardPage extends StatefulWidget {
   const DashboardPage({Key? key}) : super(key: key);
@@ -36,7 +37,7 @@ class _DashboardPageState extends BaseState<DashboardPage, DashboardBloc> {
         backgroundColor: Theme.of(context).backgroundColor,
         body: SafeArea(
           child: Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 16),
+            padding: EdgeInsets.symmetric(horizontal: 16.responsive()),
             child: SingleChildScrollView(
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
@@ -70,7 +71,7 @@ class _DashboardPageState extends BaseState<DashboardPage, DashboardBloc> {
       style: TextStyle(
         color: Theme.of(context).primaryColor,
         fontWeight: FontWeight.w400,
-        fontSize: 36,
+        fontSize: 36.responsive(),
         fontFamily: FontConstants.comfortaa,
       ),
     );
@@ -93,7 +94,7 @@ class _DashboardPageState extends BaseState<DashboardPage, DashboardBloc> {
             style: TextStyle(
               color: Theme.of(context).primaryColor,
               fontWeight: FontWeight.w900,
-              fontSize: 13,
+              fontSize: 13.responsive(),
             ),
           ),
           const SizedBox(height: 24),
@@ -105,28 +106,33 @@ class _DashboardPageState extends BaseState<DashboardPage, DashboardBloc> {
 
   Widget _newTodayWidget(DashboardState state) {
     final String? imageUrl = state.newToday?.imageUrl;
-    return Column(
-      children: <Widget>[
-        if (imageUrl == null)
-          SizedBox(
-            width: 343,
-            height: 343,
-            child: CachedNetworkImageHelper.error(),
-          )
-        else
-          CachedNetworkImage(
-            imageUrl: imageUrl,
-            fit: BoxFit.cover,
-            width: 343,
-            height: 343,
-            placeholder: (_, __) => CachedNetworkImageHelper.placeholder(),
-            errorWidget: (_, __, dynamic ___) =>
-                CachedNetworkImageHelper.error(),
-          ),
-        const SizedBox(height: 16),
-        _info(state),
-      ],
-    );
+    final double pixRatio = MediaQuery.of(context).devicePixelRatio;
+    return LayoutBuilder(builder: (_, BoxConstraints constraints) {
+      final double width = constraints.maxWidth;
+      return Column(
+        children: <Widget>[
+          if (imageUrl == null)
+            SizedBox(
+              width: width,
+              height: width,
+              child: CachedNetworkImageHelper.error(),
+            )
+          else
+            CachedNetworkImage(
+              imageUrl: imageUrl,
+              fit: BoxFit.cover,
+              width: width,
+              height: width,
+              memCacheHeight: (width * pixRatio).round(),
+              placeholder: (_, __) => CachedNetworkImageHelper.placeholder(),
+              errorWidget: (_, __, dynamic ___) =>
+                  CachedNetworkImageHelper.error(),
+            ),
+          const SizedBox(height: 16),
+          _info(state),
+        ],
+      );
+    });
   }
 
   Widget _info(DashboardState state) {
@@ -149,6 +155,7 @@ class _DashboardPageState extends BaseState<DashboardPage, DashboardBloc> {
         final String imageUrl = listImage.elementAt(index);
         return CachedNetworkImage(
           imageUrl: imageUrl,
+          fit: BoxFit.fitWidth,
           placeholder: (_, __) => CachedNetworkImageHelper.placeholder(),
           errorWidget: (_, __, dynamic ___) => CachedNetworkImageHelper.error(),
         );
@@ -171,63 +178,67 @@ class _DashboardPageState extends BaseState<DashboardPage, DashboardBloc> {
   }
 
   Widget _bottomNav() {
-    return Container(
-      padding: const EdgeInsets.symmetric(vertical: 9),
-      decoration: BoxDecoration(
-        color: Theme.of(context).backgroundColor,
-        boxShadow: <BoxShadow>[
-          BoxShadow(
-            color: Theme.of(context).primaryColor.withOpacity(0.3),
-            offset: const Offset(0, -0.5),
-          )
-        ],
-      ),
-      child: Row(
-        mainAxisAlignment: MainAxisAlignment.spaceAround,
-        children: <Widget>[
-          SvgPicture.asset(
-            "assets/images/bottom_nav_home.svg",
-            height: 16,
-            color: Theme.of(context).primaryColor.withOpacity(0.8),
-          ),
-          SvgPicture.asset(
-            "assets/images/bottom_nav_search.svg",
-            height: 16,
-            color: Theme.of(context).primaryColor.withOpacity(0.8),
-          ),
-          Container(
-            height: 40,
-            width: 70,
-            decoration: BoxDecoration(
-              borderRadius: BorderRadius.circular(20),
-              gradient: const LinearGradient(
-                begin: Alignment.topCenter,
-                end: Alignment.bottomCenter,
-                colors: <Color>[
-                  Color(0xFFFF00D6),
-                  Color(0xFFFF4D00),
-                ],
+    return SafeArea(
+      child: Container(
+        padding: EdgeInsets.symmetric(
+          vertical: 9.responsive(),
+        ),
+        decoration: BoxDecoration(
+          color: Theme.of(context).backgroundColor,
+          boxShadow: <BoxShadow>[
+            BoxShadow(
+              color: Theme.of(context).primaryColor.withOpacity(0.3),
+              offset: const Offset(0, -0.5),
+            )
+          ],
+        ),
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.spaceAround,
+          children: <Widget>[
+            SvgPicture.asset(
+              "assets/images/bottom_nav_home.svg",
+              height: 16.responsive(),
+              color: Theme.of(context).primaryColor.withOpacity(0.8),
+            ),
+            SvgPicture.asset(
+              "assets/images/bottom_nav_search.svg",
+              height: 16.responsive(),
+              color: Theme.of(context).primaryColor.withOpacity(0.8),
+            ),
+            Container(
+              height: 40.responsive(),
+              width: 70.responsive(),
+              decoration: BoxDecoration(
+                borderRadius: BorderRadius.circular(20.responsive()),
+                gradient: const LinearGradient(
+                  begin: Alignment.topCenter,
+                  end: Alignment.bottomCenter,
+                  colors: <Color>[
+                    Color(0xFFFF00D6),
+                    Color(0xFFFF4D00),
+                  ],
+                ),
+              ),
+              child: Center(
+                child: SvgPicture.asset(
+                  "assets/images/bottom_nav_add.svg",
+                  height: 16.responsive(),
+                  color: Theme.of(context).backgroundColor,
+                ),
               ),
             ),
-            child: Center(
-              child: SvgPicture.asset(
-                "assets/images/bottom_nav_add.svg",
-                height: 16,
-                color: Theme.of(context).backgroundColor,
-              ),
+            SvgPicture.asset(
+              "assets/images/bottom_nav_message.svg",
+              height: 16.responsive(),
+              color: Theme.of(context).primaryColor.withOpacity(0.8),
             ),
-          ),
-          SvgPicture.asset(
-            "assets/images/bottom_nav_message.svg",
-            height: 16,
-            color: Theme.of(context).primaryColor.withOpacity(0.8),
-          ),
-          SvgPicture.asset(
-            "assets/images/bottom_nav_person.svg",
-            height: 16,
-            color: Theme.of(context).primaryColor.withOpacity(0.8),
-          ),
-        ],
+            SvgPicture.asset(
+              "assets/images/bottom_nav_person.svg",
+              height: 16.responsive(),
+              color: Theme.of(context).primaryColor.withOpacity(0.8),
+            ),
+          ],
+        ),
       ),
     );
   }
