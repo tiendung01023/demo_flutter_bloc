@@ -24,10 +24,9 @@ class LoginBloc extends BaseBloc<NoDataState> {
 
   Future<void> _goToHomeScreen() async {
     print('[LoginBloc - goToLoginScreen] run');
-    await Navigator.pushNamedAndRemoveUntil(
+    await Navigator.pushNamed(
       context,
       Routes.home,
-      (_) => false,
     );
   }
 }

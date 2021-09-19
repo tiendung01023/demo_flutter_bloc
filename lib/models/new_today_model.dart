@@ -13,7 +13,7 @@ class NewTodayModel {
     : imageUrl = json['imageUrl'] as String?,
       info = (json['info'] as Map<String,dynamic>?) != null ? InfoModel.fromJson(json['info'] as Map<String,dynamic>) : null;
 
-  Map<String, dynamic> toJson() => {
+  Map<String, dynamic> toJson() => <String, dynamic>{
     'imageUrl' : imageUrl,
     'info' : info?.toJson()
   };

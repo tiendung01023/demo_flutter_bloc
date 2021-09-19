@@ -1,19 +1,19 @@
-
-
 import 'package:flutter/material.dart';
 
 class LinearGradientMaskWidget extends StatelessWidget {
-  LinearGradientMaskWidget({
+  const LinearGradientMaskWidget({
+    Key? key,
     required this.child,
     required this.colors,
-  });
+  }) : super(key: key);
+  
   final Widget child;
   final List<Color> colors;
 
   @override
   Widget build(BuildContext context) {
     return ShaderMask(
-      shaderCallback: (bounds) {
+      shaderCallback: (Rect bounds) {
         return RadialGradient(
           center: Alignment.centerLeft,
           radius: 1,

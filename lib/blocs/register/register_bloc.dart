@@ -4,9 +4,9 @@ import 'package:flutter/widgets.dart';
 import '../base/base_bloc.dart';
 
 class RegisterBloc extends BaseBloc<NoDataState> {
-  final usernameController = TextEditingController();
-  final passwordController = TextEditingController();
-  final rePasswordController = TextEditingController();
+  final TextEditingController usernameController = TextEditingController();
+  final TextEditingController passwordController = TextEditingController();
+  final TextEditingController rePasswordController = TextEditingController();
 
   RegisterBloc() : super(NoDataState());
 

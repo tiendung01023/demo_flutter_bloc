@@ -8,7 +8,7 @@ mixin Routes {
   static String get register => 'register';
   static String get home => 'home';
 
-  static PageRoute getRoute(RouteSettings settings) {
+  static PageRoute<dynamic> getRoute(RouteSettings settings) {
     Widget widget;
     try {
       widget = GetIt.I.get<Widget>(instanceName: settings.name);
@@ -23,6 +23,6 @@ mixin Routes {
         ),
       );
     }
-    return MaterialPageRoute(builder: (_) => widget, settings: settings);
+    return MaterialPageRoute<dynamic>(builder: (_) => widget, settings: settings);
   }
 }

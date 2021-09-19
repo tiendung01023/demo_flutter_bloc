@@ -14,7 +14,7 @@ class InfoModel {
       name = json['name'] as String?,
       avatar = json['avatar'] as String?;
 
-  Map<String, dynamic> toJson() => {
+  Map<String, dynamic> toJson() => <String, dynamic>{
     'username' : username,
     'name' : name,
     'avatar' : avatar

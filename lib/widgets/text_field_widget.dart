@@ -2,7 +2,7 @@ import 'package:demo_flutter_bloc/resources/colors.dart';
 import 'package:flutter/material.dart';
 
 class TextFieldWidget extends StatelessWidget {
-  final _defaultTextFieldBoder = OutlineInputBorder(
+  final OutlineInputBorder _defaultTextFieldBoder = OutlineInputBorder(
     borderRadius: BorderRadius.zero,
     borderSide: BorderSide(color: MyColors.primary, width: 2),
   );

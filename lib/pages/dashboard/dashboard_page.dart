@@ -1,47 +1,47 @@
 import 'package:cached_network_image/cached_network_image.dart';
-import 'package:demo_flutter_bloc/blocs/home/home_bloc.dart';
-import 'package:demo_flutter_bloc/blocs/home/home_state.dart';
+import 'package:demo_flutter_bloc/blocs/dashboard/dashboard_bloc.dart';
+import 'package:demo_flutter_bloc/blocs/dashboard/dashboard_state.dart';
 import 'package:demo_flutter_bloc/constants.dart';
 import 'package:demo_flutter_bloc/helpers/cached_network_image_helper.dart';
+import 'package:demo_flutter_bloc/models/info_model.dart';
 import 'package:demo_flutter_bloc/pages/base/base_state.dart';
 import 'package:demo_flutter_bloc/resources/colors.dart';
 import 'package:demo_flutter_bloc/widgets/info_widget.dart';
-import 'package:demo_flutter_bloc/widgets/linear_gradient_mark_widget.dart';
 import 'package:demo_flutter_bloc/widgets/text_button_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
 import 'package:flutter_svg/svg.dart';
 
-class HomePage extends StatefulWidget {
-  const HomePage({Key? key}) : super(key: key);
+class DashboardPage extends StatefulWidget {
+  const DashboardPage({Key? key}) : super(key: key);
 
   @override
-  _HomePageState createState() => _HomePageState();
+  _DashboardPageState createState() => _DashboardPageState();
 }
 
-class _HomePageState extends BaseState<HomePage, HomeBloc> {
+class _DashboardPageState extends BaseState<DashboardPage, DashboardBloc> {
   @override
   Widget buildContent(BuildContext context) {
-    return BlocBuilder<HomeBloc, HomeState>(
-      builder: (context, state) {
+    return BlocBuilder<DashboardBloc, DashboardState>(
+      builder: (_, DashboardState state) {
         return _buildView(state);
       },
     );
   }
 
-  Widget _buildView(HomeState state) {
+  Widget _buildView(DashboardState state) {
     return GestureDetector(
       onTap: () => FocusScope.of(context).unfocus(),
       child: Scaffold(
         backgroundColor: MyColors.primaryBackground,
         body: SafeArea(
           child: Padding(
-            padding: EdgeInsets.symmetric(horizontal: 16),
+            padding: const EdgeInsets.symmetric(horizontal: 16),
             child: SingleChildScrollView(
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
+                children: <Widget>[
                   const SizedBox(height: 44),
                   _titleWidget(),
                   _groupWidget(
@@ -66,7 +66,7 @@ class _HomePageState extends BaseState<HomePage, HomeBloc> {
   }
 
   Widget _titleWidget() {
-    return Text(
+    return const Text(
       "Discover",
       style: TextStyle(
         fontWeight: FontWeight.w400,
@@ -87,10 +87,10 @@ class _HomePageState extends BaseState<HomePage, HomeBloc> {
       ),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
+        children: <Widget>[
           Text(
             title.toUpperCase(),
-            style: TextStyle(
+            style: const TextStyle(
               fontWeight: FontWeight.w900,
               fontSize: 13,
             ),
@@ -102,32 +102,34 @@ class _HomePageState extends BaseState<HomePage, HomeBloc> {
     );
   }
 
-  Widget _newTodayWidget(HomeState state) {
-    final imageUrl = state.newToday?.imageUrl;
+  Widget _newTodayWidget(DashboardState state) {
+    final String? imageUrl = state.newToday?.imageUrl;
     return Column(
-      children: [
-        imageUrl == null
-            ? SizedBox(
-                width: 343,
-                height: 343,
-                child: CachedNetworkImageHelper.error(),
-              )
-            : CachedNetworkImage(
-                imageUrl: imageUrl,
-                fit: BoxFit.cover,
-                width: 343,
-                height: 343,
-                placeholder: (_, __) => CachedNetworkImageHelper.placeholder(),
-                errorWidget: (_, __, ___) => CachedNetworkImageHelper.error(),
-              ),
+      children: <Widget>[
+        if (imageUrl == null)
+          SizedBox(
+            width: 343,
+            height: 343,
+            child: CachedNetworkImageHelper.error(),
+          )
+        else
+          CachedNetworkImage(
+            imageUrl: imageUrl,
+            fit: BoxFit.cover,
+            width: 343,
+            height: 343,
+            placeholder: (_, __) => CachedNetworkImageHelper.placeholder(),
+            errorWidget: (_, __, dynamic ___) =>
+                CachedNetworkImageHelper.error(),
+          ),
         const SizedBox(height: 16),
         _info(state),
       ],
     );
   }
 
-  Widget _info(HomeState state) {
-    final info = state.newToday?.info;
+  Widget _info(DashboardState state) {
+    final InfoModel? info = state.newToday?.info;
     return InfoWidget(
       imageUrl: info?.avatar,
       name: info?.name,
@@ -135,23 +137,23 @@ class _HomePageState extends BaseState<HomePage, HomeBloc> {
     );
   }
 
-  Widget _browseAllWidget(HomeState state) {
-    final listImage = state.listImage;
+  Widget _browseAllWidget(DashboardState state) {
+    final List<String> listImage = state.listImage;
     return StaggeredGridView.countBuilder(
       physics: const NeverScrollableScrollPhysics(),
       shrinkWrap: true,
       crossAxisCount: 4,
       itemCount: listImage.length,
       itemBuilder: (BuildContext context, int index) {
-        final imageUrl = listImage.elementAt(index);
+        final String imageUrl = listImage.elementAt(index);
         return CachedNetworkImage(
           imageUrl: imageUrl,
           placeholder: (_, __) => CachedNetworkImageHelper.placeholder(),
-          errorWidget: (_, __, ___) => CachedNetworkImageHelper.error(),
+          errorWidget: (_, __, dynamic ___) => CachedNetworkImageHelper.error(),
         );
       },
       staggeredTileBuilder: (int index) {
-        return StaggeredTile.fit(2);
+        return const StaggeredTile.fit(2);
       },
       mainAxisSpacing: 9,
       crossAxisSpacing: 9,
@@ -169,19 +171,19 @@ class _HomePageState extends BaseState<HomePage, HomeBloc> {
 
   Widget _bottomNav() {
     return Container(
-      padding: EdgeInsets.symmetric(vertical: 9),
+      padding: const EdgeInsets.symmetric(vertical: 9),
       decoration: BoxDecoration(
         color: MyColors.primaryBackground,
-        boxShadow: [
+        boxShadow: <BoxShadow>[
           BoxShadow(
             color: MyColors.primary.withOpacity(0.3),
-            offset: Offset(0, -0.5),
+            offset: const Offset(0, -0.5),
           )
         ],
       ),
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceAround,
-        children: [
+        children: <Widget>[
           SvgPicture.asset(
             "assets/images/bottom_nav_home.svg",
             height: 16,
@@ -197,10 +199,10 @@ class _HomePageState extends BaseState<HomePage, HomeBloc> {
             width: 70,
             decoration: BoxDecoration(
               borderRadius: BorderRadius.circular(20),
-              gradient: LinearGradient(
+              gradient: const LinearGradient(
                 begin: Alignment.topCenter,
                 end: Alignment.bottomCenter,
-                colors: [
+                colors: <Color>[
                   Color(0xFFFF00D6),
                   Color(0xFFFF4D00),
                 ],

@@ -1,6 +1,7 @@
 import 'package:demo_flutter_bloc/blocs/splash/splash_bloc.dart';
 import 'package:demo_flutter_bloc/blocs/splash/splash_state.dart';
 import 'package:demo_flutter_bloc/constants.dart';
+import 'package:demo_flutter_bloc/models/info_model.dart';
 import 'package:demo_flutter_bloc/pages/base/base_state.dart';
 import 'package:demo_flutter_bloc/resources/colors.dart';
 import 'package:demo_flutter_bloc/widgets/info_widget.dart';
@@ -21,7 +22,7 @@ class _SplashPageState extends BaseState<SplashPage, SplashBloc> {
   @override
   Widget buildContent(BuildContext context) {
     return BlocBuilder<SplashBloc, SplashState>(
-      builder: (context, state) {
+      builder: (_, SplashState state) {
         return _buildView(state);
       },
     );
@@ -30,12 +31,12 @@ class _SplashPageState extends BaseState<SplashPage, SplashBloc> {
   Widget _buildView(SplashState state) {
     return Scaffold(
       body: Stack(
-        children: [
+        children: <Widget>[
           _background(),
           Padding(
             padding: const EdgeInsets.all(14),
             child: Column(
-              children: [
+              children: <Widget>[
                 Expanded(
                   child: _logo(),
                 ),
@@ -65,13 +66,13 @@ class _SplashPageState extends BaseState<SplashPage, SplashBloc> {
   Widget _logo() {
     return Row(
       mainAxisAlignment: MainAxisAlignment.center,
-      children: [
+      children: <Widget>[
         Padding(
           padding: const EdgeInsets.only(right: 20),
           child: Stack(
-            children: [
+            children: <Widget>[
               LinearGradientMaskWidget(
-                colors: [
+                colors: const <Color>[
                   Color(0xFFFF00D6),
                   Color(0xFFFF4D00),
                 ],
@@ -86,7 +87,7 @@ class _SplashPageState extends BaseState<SplashPage, SplashBloc> {
             ],
           ),
         ),
-        Text(
+        const Text(
           "photo",
           style: TextStyle(
             fontWeight: FontWeight.w400,
@@ -99,7 +100,7 @@ class _SplashPageState extends BaseState<SplashPage, SplashBloc> {
   }
 
   Widget _info(SplashState state) {
-    final info = state.info;
+    final InfoModel? info = state.info;
     return InfoWidget(
       imageUrl: info?.avatar,
       name: info?.name,
@@ -109,7 +110,7 @@ class _SplashPageState extends BaseState<SplashPage, SplashBloc> {
 
   Widget _actions() {
     return Row(
-      children: [
+      children: <Widget>[
         Expanded(
           child: TextButtonWidget(
             text: "LOG IN",

@@ -20,7 +20,7 @@ class _LoginPageState extends BaseState<LoginPage, LoginBloc> {
   @override
   Widget buildContent(BuildContext context) {
     return BlocBuilder<LoginBloc, NoDataState>(
-      builder: (context, data) {
+      builder: (_, __) {
         return _buildView();
       },
     );
@@ -34,15 +34,15 @@ class _LoginPageState extends BaseState<LoginPage, LoginBloc> {
         body: SafeArea(
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
+            children: <Widget>[
               _customAppbarWidget(),
               Expanded(
                 child: Padding(
-                  padding: EdgeInsets.symmetric(horizontal: 16),
+                  padding: const EdgeInsets.symmetric(horizontal: 16),
                   child: SingleChildScrollView(
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
+                      children: <Widget>[
                         const SizedBox(height: 4),
                         _titleWidget(),
                         const SizedBox(height: 33),
@@ -80,7 +80,7 @@ class _LoginPageState extends BaseState<LoginPage, LoginBloc> {
   }
 
   Widget _titleWidget() {
-    return Text(
+    return const Text(
       "Log in",
       style: TextStyle(
         fontWeight: FontWeight.w400,
@@ -92,7 +92,7 @@ class _LoginPageState extends BaseState<LoginPage, LoginBloc> {
 
   Widget _formWidget() {
     return Column(
-      children: [
+      children: <Widget>[
         TextFieldWidget(
           controller: bloc.usernameController,
           hintText: "Username",

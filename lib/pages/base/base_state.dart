@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:get_it/get_it.dart';
 
-abstract class BaseState<T extends StatefulWidget, B extends BaseBloc>
+abstract class BaseState<T extends StatefulWidget, B extends BaseBloc<dynamic>>
     extends State<T> {
   bool _isFirstInit = true;
 
@@ -26,7 +26,7 @@ abstract class BaseState<T extends StatefulWidget, B extends BaseBloc>
     super.didChangeDependencies();
     if (_isFirstInit) {
       if (mounted) {
-        final args = ModalRoute.of(context)?.settings.arguments;
+        final Object? args = ModalRoute.of(context)?.settings.arguments;
         onStart(context, args);
       }
       _isFirstInit = false;
@@ -35,7 +35,7 @@ abstract class BaseState<T extends StatefulWidget, B extends BaseBloc>
 
   @mustCallSuper
   void onStart(BuildContext context, Object? payload) {
-    var log = '$widget onStart';
+    String log = '$widget onStart';
     if (payload != null) {
       log = '$log with args: $payload';
     }
@@ -53,7 +53,7 @@ abstract class BaseState<T extends StatefulWidget, B extends BaseBloc>
 
   @override
   Widget build(BuildContext context) {
-    return BlocProvider(
+    return BlocProvider<B>(
         create: (_) => bloc,
         child: buildContent(context),
       );

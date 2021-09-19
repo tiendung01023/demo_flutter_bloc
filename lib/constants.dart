@@ -1,3 +1,3 @@
 class FontConstants {
-  static const comfortaa = "Comfortaa";
+  static const String comfortaa = 'Comfortaa';
 }

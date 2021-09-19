@@ -1,25 +1,24 @@
 import 'package:demo_flutter_bloc/blocs/base/no_data_state.dart';
-import 'package:demo_flutter_bloc/blocs/register/register_bloc.dart';
+import 'package:demo_flutter_bloc/blocs/login/login_bloc.dart';
 import 'package:demo_flutter_bloc/constants.dart';
 import 'package:demo_flutter_bloc/pages/base/base_state.dart';
-import 'package:demo_flutter_bloc/resources/colors.dart';
 import 'package:demo_flutter_bloc/widgets/text_button_widget.dart';
 import 'package:demo_flutter_bloc/widgets/text_field_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/svg.dart';
 
-class RegisterPage extends StatefulWidget {
-  const RegisterPage({Key? key}) : super(key: key);
+class LoginPage extends StatefulWidget {
+  const LoginPage({Key? key}) : super(key: key);
 
   @override
-  _RegisterPageState createState() => _RegisterPageState();
+  _LoginPageState createState() => _LoginPageState();
 }
 
-class _RegisterPageState extends BaseState<RegisterPage, RegisterBloc> {
+class _LoginPageState extends BaseState<LoginPage, LoginBloc> {
   @override
   Widget buildContent(BuildContext context) {
-    return BlocBuilder<RegisterBloc, NoDataState>(
+    return BlocBuilder<LoginBloc, NoDataState>(
       builder: (_, __) {
         return _buildView();
       },
@@ -30,7 +29,6 @@ class _RegisterPageState extends BaseState<RegisterPage, RegisterBloc> {
     return GestureDetector(
       onTap: () => FocusScope.of(context).unfocus(),
       child: Scaffold(
-        backgroundColor: MyColors.primaryBackground,
         body: SafeArea(
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
@@ -49,8 +47,6 @@ class _RegisterPageState extends BaseState<RegisterPage, RegisterBloc> {
                         _formWidget(),
                         const SizedBox(height: 15),
                         _btnSubmitWidget(),
-                        const SizedBox(height: 32),
-                        _policyWidget(),
                       ],
                     ),
                   ),
@@ -68,7 +64,7 @@ class _RegisterPageState extends BaseState<RegisterPage, RegisterBloc> {
       padding: const EdgeInsets.symmetric(
         vertical: 12,
       ),
-      child: InkWell(
+      child: GestureDetector(
         onTap: () => Navigator.pop(context),
         child: Padding(
           padding: const EdgeInsets.all(16.0),
@@ -83,7 +79,7 @@ class _RegisterPageState extends BaseState<RegisterPage, RegisterBloc> {
 
   Widget _titleWidget() {
     return const Text(
-      "Register",
+      "Log in",
       style: TextStyle(
         fontWeight: FontWeight.w400,
         fontSize: 36,
@@ -105,54 +101,14 @@ class _RegisterPageState extends BaseState<RegisterPage, RegisterBloc> {
           obscureText: true,
           hintText: "Password",
         ),
-        const SizedBox(height: 16),
-        TextFieldWidget(
-          controller: bloc.rePasswordController,
-          obscureText: true,
-          hintText: "Re-enter password",
-        ),
       ],
     );
   }
 
   Widget _btnSubmitWidget() {
     return TextButtonWidget(
-      text: "SIGN UP",
+      text: "LOG IN",
       onPress: bloc.onSubmit,
-    );
-  }
-
-  Widget _policyWidget() {
-    return RichText(
-      text: TextSpan(
-        style: TextStyle(
-          // height: 1.3,
-          fontWeight: FontWeight.w400,
-          fontSize: 13,
-          color: MyColors.primary,
-        ),
-        text: "By signing up, you agree to Photo’s ",
-        children: const <InlineSpan>[
-          TextSpan(
-            text: "Terms of Service",
-            style: TextStyle(
-              decoration: TextDecoration.underline,
-            ),
-          ),
-          TextSpan(
-            text: " and ",
-          ),
-          TextSpan(
-            text: "Privacy Policy",
-            style: TextStyle(
-              decoration: TextDecoration.underline,
-            ),
-          ),
-          TextSpan(
-            text: ".",
-          ),
-        ],
-      ),
     );
   }
 }

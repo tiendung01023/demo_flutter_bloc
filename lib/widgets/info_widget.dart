@@ -17,7 +17,7 @@ class InfoWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Row(
-      children: [
+      children: <Widget>[
         Padding(
           padding: const EdgeInsets.only(right: 8),
           child: imageUrl == null
@@ -31,24 +31,24 @@ class InfoWidget extends StatelessWidget {
                     height: 30,
                     placeholder: (_, __) =>
                         CachedNetworkImageHelper.placeholder(),
-                    errorWidget: (_, __, ___) =>
+                    errorWidget: (_, __, dynamic ___) =>
                         CachedNetworkImageHelper.error(),
                   ),
                 ),
         ),
         Column(
           crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
+          children: <Widget>[
             Text(
               name ?? '',
-              style: TextStyle(
+              style: const TextStyle(
                 fontWeight: FontWeight.w700,
                 fontSize: 13,
               ),
             ),
             Text(
               username ?? '',
-              style: TextStyle(
+              style: const TextStyle(
                 fontWeight: FontWeight.w400,
                 fontSize: 11,
               ),

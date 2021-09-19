@@ -38,7 +38,7 @@ class TextButtonWidget extends StatelessWidget {
         ),
         child: Row(
           mainAxisAlignment: MainAxisAlignment.center,
-          children: [
+          children: <Widget>[
             Text(
               text,
               textAlign: TextAlign.center,
