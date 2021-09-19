@@ -5,7 +5,6 @@ import 'package:demo_flutter_bloc/constants.dart';
 import 'package:demo_flutter_bloc/helpers/cached_network_image_helper.dart';
 import 'package:demo_flutter_bloc/models/info_model.dart';
 import 'package:demo_flutter_bloc/pages/base/base_state.dart';
-import 'package:demo_flutter_bloc/resources/colors.dart';
 import 'package:demo_flutter_bloc/widgets/info_widget.dart';
 import 'package:demo_flutter_bloc/widgets/text_button_widget.dart';
 import 'package:flutter/material.dart';
@@ -34,7 +33,7 @@ class _DashboardPageState extends BaseState<DashboardPage, DashboardBloc> {
     return GestureDetector(
       onTap: () => FocusScope.of(context).unfocus(),
       child: Scaffold(
-        backgroundColor: MyColors.primaryBackground,
+        backgroundColor: Theme.of(context).backgroundColor,
         body: SafeArea(
           child: Padding(
             padding: const EdgeInsets.symmetric(horizontal: 16),
@@ -66,9 +65,10 @@ class _DashboardPageState extends BaseState<DashboardPage, DashboardBloc> {
   }
 
   Widget _titleWidget() {
-    return const Text(
+    return Text(
       "Discover",
       style: TextStyle(
+        color: Theme.of(context).primaryColor,
         fontWeight: FontWeight.w400,
         fontSize: 36,
         fontFamily: FontConstants.comfortaa,
@@ -90,7 +90,8 @@ class _DashboardPageState extends BaseState<DashboardPage, DashboardBloc> {
         children: <Widget>[
           Text(
             title.toUpperCase(),
-            style: const TextStyle(
+            style: TextStyle(
+              color: Theme.of(context).primaryColor,
               fontWeight: FontWeight.w900,
               fontSize: 13,
             ),
@@ -163,8 +164,8 @@ class _DashboardPageState extends BaseState<DashboardPage, DashboardBloc> {
   Widget _btnSeeMoreWidget() {
     return TextButtonWidget(
       text: "SEE MORE",
-      textColor: MyColors.primary,
-      backgroundColor: MyColors.primaryBackground,
+      textColor: Theme.of(context).primaryColor,
+      backgroundColor: Theme.of(context).backgroundColor,
       onPress: bloc.onSeeMore,
     );
   }
@@ -173,10 +174,10 @@ class _DashboardPageState extends BaseState<DashboardPage, DashboardBloc> {
     return Container(
       padding: const EdgeInsets.symmetric(vertical: 9),
       decoration: BoxDecoration(
-        color: MyColors.primaryBackground,
+        color: Theme.of(context).backgroundColor,
         boxShadow: <BoxShadow>[
           BoxShadow(
-            color: MyColors.primary.withOpacity(0.3),
+            color: Theme.of(context).primaryColor.withOpacity(0.3),
             offset: const Offset(0, -0.5),
           )
         ],
@@ -187,12 +188,12 @@ class _DashboardPageState extends BaseState<DashboardPage, DashboardBloc> {
           SvgPicture.asset(
             "assets/images/bottom_nav_home.svg",
             height: 16,
-            color: MyColors.primary.withOpacity(0.8),
+            color: Theme.of(context).primaryColor.withOpacity(0.8),
           ),
           SvgPicture.asset(
             "assets/images/bottom_nav_search.svg",
             height: 16,
-            color: MyColors.primary.withOpacity(0.8),
+            color: Theme.of(context).primaryColor.withOpacity(0.8),
           ),
           Container(
             height: 40,
@@ -212,19 +213,19 @@ class _DashboardPageState extends BaseState<DashboardPage, DashboardBloc> {
               child: SvgPicture.asset(
                 "assets/images/bottom_nav_add.svg",
                 height: 16,
-                color: MyColors.primaryBackground,
+                color: Theme.of(context).backgroundColor,
               ),
             ),
           ),
           SvgPicture.asset(
             "assets/images/bottom_nav_message.svg",
             height: 16,
-            color: MyColors.primary.withOpacity(0.8),
+            color: Theme.of(context).primaryColor.withOpacity(0.8),
           ),
           SvgPicture.asset(
             "assets/images/bottom_nav_person.svg",
             height: 16,
-            color: MyColors.primary.withOpacity(0.8),
+            color: Theme.of(context).primaryColor.withOpacity(0.8),
           ),
         ],
       ),

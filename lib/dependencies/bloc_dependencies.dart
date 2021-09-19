@@ -1,4 +1,4 @@
-import 'package:demo_flutter_bloc/blocs/home/home_bloc.dart';
+import 'package:demo_flutter_bloc/blocs/dashboard/dashboard_bloc.dart';
 import 'package:demo_flutter_bloc/blocs/login/login_bloc.dart';
 import 'package:demo_flutter_bloc/blocs/register/register_bloc.dart';
 import 'package:demo_flutter_bloc/blocs/splash/splash_bloc.dart';
@@ -9,6 +9,6 @@ class BlocDependencies {
     injector.registerFactory(() => SplashBloc());
     injector.registerFactory(() => LoginBloc());
     injector.registerFactory(() => RegisterBloc());
-    injector.registerFactory(() => HomeBloc());
+    injector.registerFactory(() => DashboardBloc());
   }
 }

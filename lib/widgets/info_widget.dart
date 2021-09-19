@@ -41,14 +41,16 @@ class InfoWidget extends StatelessWidget {
           children: <Widget>[
             Text(
               name ?? '',
-              style: const TextStyle(
+              style: TextStyle(
+                color: Theme.of(context).primaryColor,
                 fontWeight: FontWeight.w700,
                 fontSize: 13,
               ),
             ),
             Text(
               username ?? '',
-              style: const TextStyle(
+              style: TextStyle(
+                color: Theme.of(context).primaryColor,
                 fontWeight: FontWeight.w400,
                 fontSize: 11,
               ),

@@ -17,8 +17,8 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       navigatorKey: navigationKey,
       debugShowCheckedModeBanner: false,
-      theme: ThemeHelper.build(context, isDarkMode: false),
-      darkTheme: ThemeHelper.build(context, isDarkMode: true),
+      theme: ThemeHelper.build(context, isLightMode: true),
+      darkTheme: ThemeHelper.build(context, isLightMode: false),
       initialRoute: Routes.splash,
       onGenerateRoute: Routes.getRoute,
     );

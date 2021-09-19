@@ -2,7 +2,6 @@ import 'package:demo_flutter_bloc/blocs/base/no_data_state.dart';
 import 'package:demo_flutter_bloc/blocs/register/register_bloc.dart';
 import 'package:demo_flutter_bloc/constants.dart';
 import 'package:demo_flutter_bloc/pages/base/base_state.dart';
-import 'package:demo_flutter_bloc/resources/colors.dart';
 import 'package:demo_flutter_bloc/widgets/text_button_widget.dart';
 import 'package:demo_flutter_bloc/widgets/text_field_widget.dart';
 import 'package:flutter/material.dart';
@@ -30,7 +29,7 @@ class _RegisterPageState extends BaseState<RegisterPage, RegisterBloc> {
     return GestureDetector(
       onTap: () => FocusScope.of(context).unfocus(),
       child: Scaffold(
-        backgroundColor: MyColors.primaryBackground,
+        backgroundColor: Theme.of(context).backgroundColor,
         body: SafeArea(
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
@@ -75,6 +74,7 @@ class _RegisterPageState extends BaseState<RegisterPage, RegisterBloc> {
           child: SvgPicture.asset(
             "assets/images/back_button.svg",
             height: 11,
+            color: Theme.of(context).primaryColor,
           ),
         ),
       ),
@@ -82,9 +82,10 @@ class _RegisterPageState extends BaseState<RegisterPage, RegisterBloc> {
   }
 
   Widget _titleWidget() {
-    return const Text(
+    return Text(
       "Register",
       style: TextStyle(
+        color: Theme.of(context).primaryColor,
         fontWeight: FontWeight.w400,
         fontSize: 36,
         fontFamily: FontConstants.comfortaa,
@@ -129,7 +130,7 @@ class _RegisterPageState extends BaseState<RegisterPage, RegisterBloc> {
           // height: 1.3,
           fontWeight: FontWeight.w400,
           fontSize: 13,
-          color: MyColors.primary,
+          color: Theme.of(context).primaryColor,
         ),
         text: "By signing up, you agree to Photo’s ",
         children: const <InlineSpan>[

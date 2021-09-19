@@ -3,7 +3,6 @@ import 'package:demo_flutter_bloc/blocs/splash/splash_state.dart';
 import 'package:demo_flutter_bloc/constants.dart';
 import 'package:demo_flutter_bloc/models/info_model.dart';
 import 'package:demo_flutter_bloc/pages/base/base_state.dart';
-import 'package:demo_flutter_bloc/resources/colors.dart';
 import 'package:demo_flutter_bloc/widgets/info_widget.dart';
 import 'package:demo_flutter_bloc/widgets/linear_gradient_mark_widget.dart';
 import 'package:demo_flutter_bloc/widgets/text_button_widget.dart';
@@ -114,8 +113,8 @@ class _SplashPageState extends BaseState<SplashPage, SplashBloc> {
         Expanded(
           child: TextButtonWidget(
             text: "LOG IN",
-            backgroundColor: MyColors.primaryBackground,
-            textColor: MyColors.primary,
+            backgroundColor: Theme.of(context).backgroundColor,
+            textColor: Theme.of(context).primaryColor,
             onPress: () => bloc.goToLoginScreen(),
           ),
         ),

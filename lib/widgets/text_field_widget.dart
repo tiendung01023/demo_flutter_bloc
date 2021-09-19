@@ -1,17 +1,11 @@
-import 'package:demo_flutter_bloc/resources/colors.dart';
 import 'package:flutter/material.dart';
 
 class TextFieldWidget extends StatelessWidget {
-  final OutlineInputBorder _defaultTextFieldBoder = OutlineInputBorder(
-    borderRadius: BorderRadius.zero,
-    borderSide: BorderSide(color: MyColors.primary, width: 2),
-  );
-
   final String? hintText;
   final TextEditingController? controller;
   final bool obscureText;
 
-  TextFieldWidget({
+  const TextFieldWidget({
     Key? key,
     this.hintText,
     this.controller,
@@ -20,6 +14,10 @@ class TextFieldWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final OutlineInputBorder _defaultTextFieldBoder = OutlineInputBorder(
+      borderRadius: BorderRadius.zero,
+      borderSide: BorderSide(color: Theme.of(context).primaryColor, width: 2),
+    );
     return TextField(
       controller: controller,
       obscureText: obscureText,
@@ -27,8 +25,14 @@ class TextFieldWidget extends StatelessWidget {
         enabledBorder: _defaultTextFieldBoder,
         focusedBorder: _defaultTextFieldBoder,
         hintText: hintText,
+        hintStyle: TextStyle(
+          color: Theme.of(context).primaryColor.withOpacity(0.5),
+        ),
       ),
-      cursorColor: MyColors.primary,
+      style: TextStyle(
+        color: Theme.of(context).primaryColor,
+      ),
+      cursorColor: Theme.of(context).primaryColor,
     );
   }
 }

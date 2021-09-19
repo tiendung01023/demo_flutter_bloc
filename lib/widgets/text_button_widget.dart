@@ -1,4 +1,3 @@
-import 'package:demo_flutter_bloc/resources/colors.dart';
 import 'package:flutter/material.dart';
 
 class TextButtonWidget extends StatelessWidget {
@@ -30,11 +29,14 @@ class TextButtonWidget extends StatelessWidget {
           vertical: 19,
         ),
         decoration: BoxDecoration(
-          color: backgroundColor ?? MyColors.primary,
+          color: backgroundColor ?? Theme.of(context).primaryColor,
           borderRadius: const BorderRadius.all(
             Radius.circular(6),
           ),
-          border: Border.all(width: 2),
+          border: Border.all(
+            width: 2,
+            color: Theme.of(context).primaryColor,
+          ),
         ),
         child: Row(
           mainAxisAlignment: MainAxisAlignment.center,
@@ -45,7 +47,7 @@ class TextButtonWidget extends StatelessWidget {
               style: TextStyle(
                 fontWeight: FontWeight.w900,
                 fontSize: 13,
-                color: textColor ?? MyColors.primaryBackground,
+                color: textColor ?? Theme.of(context).backgroundColor,
               ),
             ),
           ],
