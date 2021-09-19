@@ -1,0 +1,31 @@
+{
+      "splash": {
+            "title": "photo",
+            "btn_login": "Đăng nhập",
+            "btn_register": "Đăng ký"
+      },
+      "register": {
+            "title": "Đăng ký",
+            "input_hint_username": "Tên đăng nhập",
+            "input_hint_password": "Mật khẩu",
+            "input_hint_repassword": "Nhập lại mật khẩu",
+            "btn_submit": "Đăng ký",
+            "policy_0": "Bằng việc đăng ký, bạn đồng ý với ",
+            "policy_1": "Điều khoản dịch vụ",
+            "policy_2": " và ",
+            "policy_3": "Chính sách bảo mật",
+            "policy_4": " của Photo."
+      },
+      "login": {
+            "title": "Đăng nhập",
+            "input_hint_username": "Tên đăng nhập",
+            "input_hint_password": "Mật khẩu",
+            "btn_submit": "Đăng nhập"
+      },
+      "dashboard": {
+            "title": "Khám phá",
+            "menu_new_today": "Có gì mới hôm nay",
+            "menu_browse_all": "Xem tất cả",
+            "btn_see_more": "Xem thêm"
+      }
+}
