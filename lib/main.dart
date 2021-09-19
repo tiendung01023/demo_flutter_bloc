@@ -32,7 +32,6 @@ class MyApp extends StatelessWidget {
           darkTheme: ThemeHelper.build(context, isLightMode: false),
           initialRoute: Routes.splash,
           onGenerateRoute: Routes.getRoute,
-          locale: _supportLocales.elementAt(0),
           supportedLocales: _supportLocales,
           localizationsDelegates: <LocalizationsDelegate<dynamic>>[
             AppLocalizationsDelegate(_supportLocales),
