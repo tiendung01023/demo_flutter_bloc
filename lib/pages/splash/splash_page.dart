@@ -1,5 +1,5 @@
-import 'package:demo_flutter_bloc/blocs/base/no_data_state.dart';
 import 'package:demo_flutter_bloc/blocs/splash/splash_bloc.dart';
+import 'package:demo_flutter_bloc/blocs/splash/splash_state.dart';
 import 'package:demo_flutter_bloc/constants.dart';
 import 'package:demo_flutter_bloc/pages/base/base_state.dart';
 import 'package:demo_flutter_bloc/resources/colors.dart';
@@ -19,14 +19,14 @@ class SplashPage extends StatefulWidget {
 class _SplashPageState extends BaseState<SplashPage, SplashBloc> {
   @override
   Widget buildContent(BuildContext context) {
-    return BlocBuilder<SplashBloc, NoDataState>(
-      builder: (context, data) {
-        return _buildView();
+    return BlocBuilder<SplashBloc, SplashState>(
+      builder: (context, state) {
+        return _buildView(state);
       },
     );
   }
 
-  Widget _buildView() {
+  Widget _buildView(SplashState state) {
     return Scaffold(
       body: Stack(
         children: [
@@ -40,7 +40,7 @@ class _SplashPageState extends BaseState<SplashPage, SplashBloc> {
                 ),
                 Padding(
                   padding: const EdgeInsets.only(bottom: 16),
-                  child: _info(),
+                  child: _info(state),
                 ),
                 _actions(),
               ],
@@ -97,13 +97,12 @@ class _SplashPageState extends BaseState<SplashPage, SplashBloc> {
     );
   }
 
-  Widget _info() {
-    final avatarUrl =
-        "https://media-exp1.licdn.com/dms/image/C4E03AQFvWEwjLCJLCQ/profile-displayphoto-shrink_800_800/0/1628220510849?e=1637193600&v=beta&t=E39LUUC9BeffM-h2V_Tc-9szQ9sJrMeVQLYOxKA1NMs";
+  Widget _info(SplashState state) {
+    final info = state.info;
     return InfoWidget(
-      imageUrl: avatarUrl,
-      name: "Phạm Tiến Dũng",
-      username: "@tiendung01023",
+      imageUrl: info?.avatar,
+      name: info?.name,
+      username: info?.username,
     );
   }
 

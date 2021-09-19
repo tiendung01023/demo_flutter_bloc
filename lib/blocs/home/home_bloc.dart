@@ -40,13 +40,15 @@ class HomeBloc extends BaseBloc<HomeState> {
 
   Future<void> _loadNewToday() async {
     print('[HomeBloc - _loadNewToday] run');
-    final imageUrl = "https://dulichviet247.com/wp-content/uploads/2017/11/anhr-cafe-sapa.jpg";
+    final imageUrl =
+        "https://dulichviet247.com/wp-content/uploads/2017/11/anhr-cafe-sapa.jpg";
     final model = NewTodayModel(
       imageUrl: imageUrl,
       info: InfoModel(
-        avatar: "https://scontent.fsgn5-5.fna.fbcdn.net/v/t1.6435-9/225583484_114472127525729_7211727487964193649_n.jpg?_nc_cat=108&ccb=1-5&_nc_sid=09cbfe&_nc_ohc=2MjFVvzTG14AX8gqRqi&_nc_ht=scontent.fsgn5-5.fna&oh=27b0029ac10728521e7af1d4ff1179c0&oe=616CA5BD",
+        avatar:
+            "https://scontent.fsgn5-5.fna.fbcdn.net/v/t1.6435-9/225583484_114472127525729_7211727487964193649_n.jpg?_nc_cat=108&ccb=1-5&_nc_sid=09cbfe&_nc_ohc=2MjFVvzTG14AX8gqRqi&_nc_ht=scontent.fsgn5-5.fna&oh=27b0029ac10728521e7af1d4ff1179c0&oe=616CA5BD",
         username: "@tiendung01023",
-        name: "Phạm Tiến Dũng"
+        name: "Phạm Tiến Dũng",
       ),
     );
     final newState = HomeState(
