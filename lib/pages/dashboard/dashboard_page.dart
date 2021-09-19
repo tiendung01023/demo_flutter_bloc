@@ -3,6 +3,7 @@ import 'package:demo_flutter_bloc/blocs/dashboard/dashboard_bloc.dart';
 import 'package:demo_flutter_bloc/blocs/dashboard/dashboard_state.dart';
 import 'package:demo_flutter_bloc/constants.dart';
 import 'package:demo_flutter_bloc/helpers/cached_network_image_helper.dart';
+import 'package:demo_flutter_bloc/main.dart';
 import 'package:demo_flutter_bloc/models/info_model.dart';
 import 'package:demo_flutter_bloc/pages/base/base_state.dart';
 import 'package:demo_flutter_bloc/widgets/info_widget.dart';
@@ -45,11 +46,11 @@ class _DashboardPageState extends BaseState<DashboardPage, DashboardBloc> {
                   const SizedBox(height: 44),
                   _titleWidget(),
                   _groupWidget(
-                    title: "What’s new today",
+                    title: localize('dashboard.menu_new_today'),
                     child: _newTodayWidget(state),
                   ),
                   _groupWidget(
-                    title: "Browse all",
+                    title: localize('dashboard.menu_browse_all'),
                     child: _browseAllWidget(state),
                   ),
                   const SizedBox(height: 15),
@@ -67,7 +68,7 @@ class _DashboardPageState extends BaseState<DashboardPage, DashboardBloc> {
 
   Widget _titleWidget() {
     return Text(
-      "Discover",
+      localize('dashboard.title'),
       style: TextStyle(
         color: Theme.of(context).primaryColor,
         fontWeight: FontWeight.w400,
@@ -170,7 +171,7 @@ class _DashboardPageState extends BaseState<DashboardPage, DashboardBloc> {
 
   Widget _btnSeeMoreWidget() {
     return TextButtonWidget(
-      text: "SEE MORE",
+      text: localize('dashboard.btn_see_more').toUpperCase(),
       textColor: Theme.of(context).primaryColor,
       backgroundColor: Theme.of(context).backgroundColor,
       onPress: bloc.onSeeMore,
@@ -196,12 +197,12 @@ class _DashboardPageState extends BaseState<DashboardPage, DashboardBloc> {
           mainAxisAlignment: MainAxisAlignment.spaceAround,
           children: <Widget>[
             SvgPicture.asset(
-              "assets/images/bottom_nav_home.svg",
+              ImageConstants.bottomNavHome,
               height: 16.responsive(),
               color: Theme.of(context).primaryColor.withOpacity(0.8),
             ),
             SvgPicture.asset(
-              "assets/images/bottom_nav_search.svg",
+              ImageConstants.bottomNavSearch,
               height: 16.responsive(),
               color: Theme.of(context).primaryColor.withOpacity(0.8),
             ),
@@ -221,19 +222,19 @@ class _DashboardPageState extends BaseState<DashboardPage, DashboardBloc> {
               ),
               child: Center(
                 child: SvgPicture.asset(
-                  "assets/images/bottom_nav_add.svg",
+                  ImageConstants.bottomNavAdd,
                   height: 16.responsive(),
                   color: Theme.of(context).backgroundColor,
                 ),
               ),
             ),
             SvgPicture.asset(
-              "assets/images/bottom_nav_message.svg",
+              ImageConstants.bottomNavMessage,
               height: 16.responsive(),
               color: Theme.of(context).primaryColor.withOpacity(0.8),
             ),
             SvgPicture.asset(
-              "assets/images/bottom_nav_person.svg",
+              ImageConstants.bottomNavPerson,
               height: 16.responsive(),
               color: Theme.of(context).primaryColor.withOpacity(0.8),
             ),

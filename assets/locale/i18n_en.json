@@ -1,0 +1,31 @@
+{
+      "splash": {
+            "title": "photo",
+            "btn_login": "Log in",
+            "btn_register": "Register"
+      },
+      "register": {
+            "title": "Register",
+            "input_hint_username": "Username",
+            "input_hint_password": "Password",
+            "input_hint_repassword": "Re-enter password",
+            "btn_submit": "Sign up",
+            "policy_0": "By signing up, you agree to Photo’s ",
+            "policy_1": "Terms of Service",
+            "policy_2": " and ",
+            "policy_3": "Privacy Policy",
+            "policy_4": "."
+      },
+      "login": {
+            "title": "Log in",
+            "input_hint_username": "Username",
+            "input_hint_password": "Password",
+            "btn_submit": "Log in"
+      },
+      "dashboard": {
+            "title": "Discover",
+            "menu_new_today": "What’s new today",
+            "menu_browse_all": "Browse all",
+            "btn_see_more": "See more"
+      }
+}

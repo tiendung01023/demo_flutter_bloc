@@ -1,6 +1,7 @@
 import 'package:demo_flutter_bloc/blocs/base/no_data_state.dart';
 import 'package:demo_flutter_bloc/blocs/register/register_bloc.dart';
 import 'package:demo_flutter_bloc/constants.dart';
+import 'package:demo_flutter_bloc/main.dart';
 import 'package:demo_flutter_bloc/pages/base/base_state.dart';
 import 'package:demo_flutter_bloc/widgets/back_button_widget.dart';
 import 'package:demo_flutter_bloc/widgets/text_button_widget.dart';
@@ -76,7 +77,7 @@ class _RegisterPageState extends BaseState<RegisterPage, RegisterBloc> {
 
   Widget _titleWidget() {
     return Text(
-      "Register",
+      localize('register.title'),
       style: TextStyle(
         color: Theme.of(context).primaryColor,
         fontWeight: FontWeight.w400,
@@ -91,19 +92,19 @@ class _RegisterPageState extends BaseState<RegisterPage, RegisterBloc> {
       children: <Widget>[
         TextFieldWidget(
           controller: bloc.usernameController,
-          hintText: "Username",
+          hintText: localize('register.input_hint_username'),
         ),
         const SizedBox(height: 16),
         TextFieldWidget(
           controller: bloc.passwordController,
           obscureText: true,
-          hintText: "Password",
+          hintText: localize('register.input_hint_password'),
         ),
         const SizedBox(height: 16),
         TextFieldWidget(
           controller: bloc.rePasswordController,
           obscureText: true,
-          hintText: "Re-enter password",
+          hintText: localize('register.input_hint_repassword'),
         ),
       ],
     );
@@ -111,7 +112,7 @@ class _RegisterPageState extends BaseState<RegisterPage, RegisterBloc> {
 
   Widget _btnSubmitWidget() {
     return TextButtonWidget(
-      text: "SIGN UP",
+      text: localize('register.btn_submit').toUpperCase(),
       onPress: bloc.onSubmit,
     );
   }
@@ -125,25 +126,25 @@ class _RegisterPageState extends BaseState<RegisterPage, RegisterBloc> {
           fontSize: 13.responsive(),
           color: Theme.of(context).primaryColor,
         ),
-        text: "By signing up, you agree to Photo’s ",
-        children: const <InlineSpan>[
+        text: localize('register.policy_0'),
+        children: <InlineSpan>[
           TextSpan(
-            text: "Terms of Service",
-            style: TextStyle(
+            text: localize('register.policy_1'),
+            style: const TextStyle(
               decoration: TextDecoration.underline,
             ),
           ),
           TextSpan(
-            text: " and ",
+            text: localize('register.policy_2'),
           ),
           TextSpan(
-            text: "Privacy Policy",
-            style: TextStyle(
+            text: localize('register.policy_3'),
+            style: const TextStyle(
               decoration: TextDecoration.underline,
             ),
           ),
           TextSpan(
-            text: ".",
+            text: localize('register.policy_4'),
           ),
         ],
       ),

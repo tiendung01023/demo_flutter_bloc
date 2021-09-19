@@ -1,3 +1,4 @@
+import 'package:demo_flutter_bloc/constants.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:demo_flutter_bloc/extensions/responsive_extension.dart';
@@ -19,7 +20,7 @@ class BackButtonWidget extends StatelessWidget {
           horizontal: 16.responsive(),
         ),
         child: SvgPicture.asset(
-          "assets/images/back_button.svg",
+          ImageConstants.backButton,
           height: 11.responsive(),
           color: Theme.of(context).primaryColor,
         ),

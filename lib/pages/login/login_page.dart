@@ -1,6 +1,7 @@
 import 'package:demo_flutter_bloc/blocs/base/no_data_state.dart';
 import 'package:demo_flutter_bloc/blocs/login/login_bloc.dart';
 import 'package:demo_flutter_bloc/constants.dart';
+import 'package:demo_flutter_bloc/main.dart';
 import 'package:demo_flutter_bloc/pages/base/base_state.dart';
 import 'package:demo_flutter_bloc/widgets/back_button_widget.dart';
 import 'package:demo_flutter_bloc/widgets/text_button_widget.dart';
@@ -74,7 +75,7 @@ class _LoginPageState extends BaseState<LoginPage, LoginBloc> {
 
   Widget _titleWidget() {
     return Text(
-      "Log in",
+      localize('login.title'),
       style: TextStyle(
         color: Theme.of(context).primaryColor,
         fontWeight: FontWeight.w400,
@@ -89,13 +90,13 @@ class _LoginPageState extends BaseState<LoginPage, LoginBloc> {
       children: <Widget>[
         TextFieldWidget(
           controller: bloc.usernameController,
-          hintText: "Username",
+          hintText: localize('login.input_hint_username'),
         ),
         const SizedBox(height: 16),
         TextFieldWidget(
           controller: bloc.passwordController,
           obscureText: true,
-          hintText: "Password",
+          hintText: localize('login.input_hint_password'),
         ),
       ],
     );
@@ -103,7 +104,7 @@ class _LoginPageState extends BaseState<LoginPage, LoginBloc> {
 
   Widget _btnSubmitWidget() {
     return TextButtonWidget(
-      text: "LOG IN",
+      text: localize('login.btn_submit').toUpperCase(),
       onPress: bloc.onSubmit,
     );
   }
