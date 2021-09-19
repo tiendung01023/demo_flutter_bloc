@@ -49,6 +49,8 @@ class _RegisterPageState extends BaseState<RegisterPage, RegisterBloc> {
                         _formWidget(),
                         const SizedBox(height: 15),
                         _btnSubmitWidget(),
+                        const SizedBox(height: 32),
+                        _policyWidget(),
                       ],
                     ),
                   ),
@@ -117,6 +119,42 @@ class _RegisterPageState extends BaseState<RegisterPage, RegisterBloc> {
     return TextButtonWidget(
       text: "SIGN UP",
       onPress: bloc.onSubmit,
+    );
+  }
+
+  Widget _policyWidget() {
+    return Container(
+      child: RichText(
+        text: TextSpan(
+          style: TextStyle(
+            // height: 1.3,
+            fontWeight: FontWeight.w400,
+            fontSize: 13,
+            color: MyColors.primary,
+          ),
+          text: "By signing up, you agree to Photo’s ",
+          children: [
+            TextSpan(
+              text: "Terms of Service",
+              style: TextStyle(
+                decoration: TextDecoration.underline,
+              ),
+            ),
+            TextSpan(
+              text: " and ",
+            ),
+            TextSpan(
+              text: "Privacy Policy",
+              style: TextStyle(
+                decoration: TextDecoration.underline,
+              ),
+            ),
+            TextSpan(
+              text: ".",
+            ),
+          ],
+        ),
+      ),
     );
   }
 }
