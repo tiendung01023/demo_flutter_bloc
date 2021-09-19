@@ -1,6 +1,6 @@
 import 'package:cached_network_image/cached_network_image.dart';
-import 'package:demo_flutter_bloc/blocs/base/no_data_state.dart';
 import 'package:demo_flutter_bloc/blocs/home/home_bloc.dart';
+import 'package:demo_flutter_bloc/blocs/home/home_state.dart';
 import 'package:demo_flutter_bloc/constants.dart';
 import 'package:demo_flutter_bloc/helpers/cached_network_image_helper.dart';
 import 'package:demo_flutter_bloc/pages/base/base_state.dart';
@@ -21,14 +21,14 @@ class HomePage extends StatefulWidget {
 class _HomePageState extends BaseState<HomePage, HomeBloc> {
   @override
   Widget buildContent(BuildContext context) {
-    return BlocBuilder<HomeBloc, NoDataState>(
-      builder: (context, data) {
-        return _buildView();
+    return BlocBuilder<HomeBloc, HomeState>(
+      builder: (context, state) {
+        return _buildView(state);
       },
     );
   }
 
-  Widget _buildView() {
+  Widget _buildView(HomeState state) {
     return GestureDetector(
       onTap: () => FocusScope.of(context).unfocus(),
       child: Scaffold(
@@ -43,11 +43,11 @@ class _HomePageState extends BaseState<HomePage, HomeBloc> {
                   _titleWidget(),
                   _groupWidget(
                     title: "What’s new today",
-                    child: _newTodayWidget(),
+                    child: _newTodayWidget(state),
                   ),
                   _groupWidget(
                     title: "Browse all",
-                    child: _browseAllWidget(),
+                    child: _browseAllWidget(state),
                   ),
                   const SizedBox(height: 15),
                   _btnSeeMoreWidget(),
@@ -98,49 +98,50 @@ class _HomePageState extends BaseState<HomePage, HomeBloc> {
     );
   }
 
-  Widget _newTodayWidget() {
-    final imageUrl =
-        "https://dulichviet247.com/wp-content/uploads/2017/11/anhr-cafe-sapa.jpg";
+  Widget _newTodayWidget(HomeState state) {
+    final imageUrl = state.newToday?.imageUrl;
     return Column(
       children: [
-        CachedNetworkImage(
-          imageUrl: imageUrl,
-          fit: BoxFit.cover,
-          width: 343,
-          height: 343,
-          placeholder: (_, __) => CachedNetworkImageHelper.placeholder(),
-          errorWidget: (_, __, ___) => CachedNetworkImageHelper.error(),
-        ),
+        imageUrl == null
+            ? SizedBox(
+                width: 343,
+                height: 343,
+                child: CachedNetworkImageHelper.error(),
+              )
+            : CachedNetworkImage(
+                imageUrl: imageUrl,
+                fit: BoxFit.cover,
+                width: 343,
+                height: 343,
+                placeholder: (_, __) => CachedNetworkImageHelper.placeholder(),
+                errorWidget: (_, __, ___) => CachedNetworkImageHelper.error(),
+              ),
         const SizedBox(height: 16),
-        _info(),
+        _info(state),
       ],
     );
   }
 
-  Widget _info() {
-    final avatarUrl =
-        "https://media-exp1.licdn.com/dms/image/C4E03AQFvWEwjLCJLCQ/profile-displayphoto-shrink_800_800/0/1628220510849?e=1637193600&v=beta&t=E39LUUC9BeffM-h2V_Tc-9szQ9sJrMeVQLYOxKA1NMs";
+  Widget _info(HomeState state) {
+    final info = state.newToday?.info;
     return InfoWidget(
-      imageUrl: avatarUrl,
-      name: "Phạm Tiến Dũng",
-      username: "@tiendung01023",
+      imageUrl: info?.avatar,
+      name: info?.name,
+      username: info?.username,
     );
   }
 
-  Widget _browseAllWidget() {
+  Widget _browseAllWidget(HomeState state) {
+    final listImage = state.listImage;
     return StaggeredGridView.countBuilder(
       physics: const NeverScrollableScrollPhysics(),
       shrinkWrap: true,
       crossAxisCount: 4,
-      itemCount: 8,
+      itemCount: listImage.length,
       itemBuilder: (BuildContext context, int index) {
-        final imageUrl =
-            "https://dulichviet247.com/wp-content/uploads/2017/11/anhr-cafe-sapa.jpg";
+        final imageUrl = listImage.elementAt(index);
         return CachedNetworkImage(
           imageUrl: imageUrl,
-          fit: BoxFit.cover,
-          width: 343,
-          height: 343,
           placeholder: (_, __) => CachedNetworkImageHelper.placeholder(),
           errorWidget: (_, __, ___) => CachedNetworkImageHelper.error(),
         );
